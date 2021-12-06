@@ -30,15 +30,13 @@ def part1(init_fishes, countdown):
 def part2(dict_fishes, countdown):
     for day in range(countdown):
         print(dict_fishes)
-        for k, v in dict_fishes.items():
-            if k == 0:
-                dict_fishes[6] = v
-                dict_fishes[0] = 0
-                dict_fishes[8] += 1
-            else:
-                dict_fishes[k-1] = v
+        day_dict = dict_fishes.copy()
+        for k, v in day_dict.items():
+            if v > 0:
+                print(k)
+        dict_fishes = day_dict
     return sum(dict_fishes.values())
 
 dict_test = prepare_lists(test)
-print(part2(dict_test, 18))
+print(part2(dict_test, 2))
 # print(part2(test, 250))
