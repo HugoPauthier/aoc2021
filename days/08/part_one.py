@@ -1,6 +1,6 @@
 
 def prepare_data(file):
-    """It prepare the fishes list"""
+    """It prepare the data list"""
     with open(file) as file:
         data = file.read().splitlines()
         res = []
@@ -14,10 +14,10 @@ def prepare_data(file):
 
 
 def part1(data):
+    """Part one"""
     res = 0
     for entry in data:
         for value in entry['output_values']:
             if len(value) in (2, 3, 4, 7):
                 res += 1
-    return 1
-
+    return res
