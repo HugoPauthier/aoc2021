@@ -107,3 +107,49 @@ def part1(heightmap):
     risk_level_sum = get_risk_level_sum(heightmap, low_points)
     # print(risk_level_sum)
     return risk_level_sum
+
+
+def parse_around(heightmap, i, j, points):
+    if [i, j] in points:
+        return 0
+    points.append([i, j])
+    count = 1
+    curr_point = heightmap[i, j]
+    if i >= 0:
+        if i > 0:
+            above = heightmap[i - 1, j]
+            # if above == curr_point + 1 and above != 9:
+            if above > curr_point and above != 9:
+                count += parse_around(heightmap, i - 1, j, points)
+        if i < len(heightmap[:, 0]) - 1:
+            below = heightmap[i + 1, j]
+            # if below == curr_point + 1 and below != 9:
+            if below > curr_point and below != 9:
+                count += parse_around(heightmap, i + 1, j, points)
+    if j >= 0:
+        if j > 0:
+            left = heightmap[i, j - 1]
+            # if left == curr_point + 1 and left != 9:
+            if left > curr_point and left != 9:
+                count += parse_around(heightmap, i, j - 1, points)
+        if j < len(heightmap[0, :]) - 1:
+            right = heightmap[i, j + 1]
+            # if right == curr_point + 1 and right != 9:
+            if right > curr_point and right != 9:
+                count += parse_around(heightmap, i, j + 1, points)
+    return count
+
+
+def part2(heightmap):
+    low_points = find_low_points(heightmap)
+    res = []
+    points = []
+    for low_point in low_points:
+        basins_lentgh = parse_around(heightmap, low_point[0], low_point[1], points)
+        res.append(basins_lentgh)
+    # print(parse_around(test_heightmap, 0, 1, []))
+    res.sort(reverse=True)
+    # print(res, len(res))
+    return (res[0] * res[1] * res[2])
+
+assert part2(test_heightmap) == 1134

@@ -5,4 +5,7 @@ with open('input.txt') as file:
     # print(input_heightmap)
     input_heightmap = prepare_data(input_data)
     # print(input_heightmap)
-    print(part1(input_heightmap))
+    # print(part1(input_heightmap))
+    print(part2(input_heightmap))
+
+# tested 254880
